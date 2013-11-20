@@ -1,0 +1,48 @@
+Xft.dpi:			96
+
+!!! xterm settings
+XTerm*preeditType: Root
+XTerm*faceName:   Dejavu Sans Mono
+XTerm*faceNameDoublesize:   WenQuanYi Zen Hei
+!XTerm*faceSize:    14
+!XTerm*font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+!XTerm*font:             -*-dejavu sans mono-medium-r-normal-*-14-*-*-*-*-*-iso10646-*
+!XTerm*font:             -*-dejavu sans mono-medium-r-normal-*-14-*-*-*-*-*-iso10646-*
+!XTerm*boldFont:         -*-dejavu sans mono-bold-r-normal-*-14-*-*-*-*-*-iso10646-*
+!XTerm*wideFont:         -*-wenquanyi bitmap song-medium-r-normal-*-16-*-*-*-*-*-iso10646-*
+!XTerm*wideBoldFont:     -*-wenquanyi bitmap song-bold-r-normal-*-13-*-*-*-*-*-iso10646-*
+XTerm*scrollBar:   false
+XTerm*background:   grey10
+XTerm*foreground:   WhiteSmoke
+!XTerm*background:   WhiteSmoke
+!XTerm*foreground:    grey10
+XTerm*cursorColor:   red
+XTerm*saveLines:  32768
+XTerm*metaSendsEscape:    true
+
+!!! urxvt settings
+URxvt*background:		grey10
+URxvt*foreground:		WhiteSmoke
+!URxvt*foreground:		Green
+!URxvt*transparent:              true
+!URxvt*font:			xft:Monaco:size=14,xft:WenQuanYi Zen Hei:size=14
+URxvt*font:			xft:Dejavu Sans Mono:size=12,xft:WenQuanYi Zen Hei:size=12
+URxvt.print-pipe:               cat > $(TMPDIR=$HOME mktemp urxvt.XXXXXX)
+URxvt*title:			rxvt-unicode
+URxvt*scrollBar:		false
+URxvt*scrollstyle:		plain
+!URxvt*saveLines:		8192
+!don't scroll to bottem
+URxvt*scrollTtyOutput:		false
+!scroll with scrollback buffer when tty receives new lines && scrollTtyOutput is false
+URxvt*scrollWithBuffer:		true
+URxvt*scrollTtyKeypress:	false
+URxvt*borderLess:               false
+!URxvt*lineSpace:                1
+URxvt*preeditType:              Root
+URxvt*perl-ext-common:		default,matcher
+URxvt*matcher*button:		1
+URxvt*urlLauncher:		opera
+!URxvt*cursorUnderline:		false
+!Change Locale to zh_CN.BGK
+URxvt.keysym.M-C-c:             command:\033]701;zh_CN.GBK\007

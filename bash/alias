@@ -1,0 +1,29 @@
+# vim: ft=sh
+# ls hacks
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -a' # List All
+alias ll='ls -l' # Long Listing
+
+# Some more alias to avoid making mistakes:
+alias rm='rm -i'
+alias mv='mv -i'
+
+# for convenient and eye candy
+alias less='less -X'
+alias more='less'
+
+# edit alias
+alias vi='vim'
+alias vib='vi ~/.bashrc && . ~/.bashrc'
+alias vil='sudo vim /etc/lilo.conf && sudo lilo -v'
+alias viv='vi ~/.vimrc'
+
+#Some common used directories and mount
+alias musb='sudo mount -t vfat -o iocharset=utf8 /dev/sdb1 /mnt/tmp && cd /mnt/tmp && ls'
+alias umusb='cd && sudo umount /mnt/tmp'
+
+# application alias
+alias wcpe='mplayer http://audio-ogg.ibiblio.org:8000/wcpe.ogg'
+alias rescreen='screen -D -R'
+alias rebdwm='pushd ~/tarball/dwm-6.0 && vi config.h && sudo make clean install && popd'
+alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
