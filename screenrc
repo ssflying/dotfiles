@@ -1,16 +1,13 @@
 # ==============================================================================
 # SCREEN SETTINGS
-# ==============================================================================
-# VARIABLES
-# ===============================================================
 
 # If set to on, "alternate screen" support is enabled in  virtual  terminals,
 # just like in xterm.  Initial setting is `off'.
-  altscreen on
+altscreen on
 
 # 缓存文件：    以下命令需要用到它。
 #               "readbuf" ('<') and  "writebuf" ('>'):
-  bufferfile            $HOME/.screen_exchange
+bufferfile            $HOME/.screen_exchange
 
 # 对于用C-a [复制文本时的范围会有影响。
 # 当开启时，以CR LF分隔行; 当关闭时，以LF分隔行
@@ -35,15 +32,14 @@
   startup_message off			# default: on
 
 # 定义被监控的窗口在显示信息前所需等待的时间。
-  silencewait 15			# default: 30
+silencewait 15			# default: 30
 
 # 关闭烦人的喇叭音提示，用弹出信息的方式。
-  vbell on				# default: off
-  vbell_msg "   -- Bell,Bell!! --   "	# default: "Wuff,Wuff!!"
+vbell on				# default: off
+vbell_msg "   -- Bell,Bell!! --   "	# default: "Wuff,Wuff!!"
 
 # XTERM TWEAKS
 # ===============================================================
-
 # xterm understands both im/ic and doesn't have a status line.
 # Note: Do not specify im and ic in the real termcap/info file as
 # some programs (e.g. vi) will not work anymore.
@@ -80,24 +76,19 @@
 ## Do not use xterm's alternative window buffer, it breaks scrollback (see bug #61195)
 termcapinfo xterm|xterms|xs ti@:te=\E[2J
 
-#
-# hardcopydir:  The directory which contains all hardcopies.
-# hardcopydir           ~/.hardcopy
-# hardcopydir           ~/.screen
+# hardcopydir: 存放硬拷贝的目录(C-a h)。
+hardcopydir           ~/.screen
 
 # shell: screen新建窗口后默认使用的shell。
 # 使得可以在screen内使用与系统默认设置不同的shell。
 # 如果以'-'开头，那么这个shell将以登录shell的方式开启。
-# shell                 zsh
-# shell                 bash
-# shell                 ksh
-shell $SHELL
+shell bash
 
 # 查看man screen的TITLES节。
-shelltitle '$ |bash'
+shelltitle '☻ |bash'
 
 # 当执行pow_detach时显示如下信息。
-  pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 
 # caption always " %w --- %c:%s"
 # caption always "%3n %t%? @%u%?%? [%h]%?%=%c"
@@ -214,22 +205,15 @@ shelltitle '$ |bash'
 # bind Z reset
 
 # 去掉几个很危险的键绑定。
-  bind k
-  bind ^k
-  bind .
-  bind ^\
-  bind \\
-  bind ^h
-  bind h
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
 
-# 去掉ctrl-g
-  bind ^g
 # ... 然后重新定义一些更好安全好用的。
-  bind 'K' kill
-  bind 'I' login on
-  bind 'O' login off
-  bind '}' history
-  bind \033 screen -ln -t root -h 1000 9 su     # C-a esc 开启root @ 9th window
+bind 'K' kill
+bind \033 screen -ln -t root -h 1000 9 su     # C-a esc 开启root @ 9th window
 
 # Yet another hack:
 # Prepend/append register [/] to the paste if ^a^] is pressed.
