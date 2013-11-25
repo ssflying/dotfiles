@@ -78,7 +78,7 @@
 #  termcapinfo xterm* be
 #
 ## Do not use xterm's alternative window buffer, it breaks scrollback (see bug #61195)
-#  termcapinfo xterm|xterms|xs ti@:te=\E[2J
+termcapinfo xterm|xterms|xs ti@:te=\E[2J
 
 #
 # hardcopydir:  The directory which contains all hardcopies.
@@ -91,7 +91,7 @@
 # shell                 zsh
 # shell                 bash
 # shell                 ksh
-  shell $SHELL
+shell $SHELL
 
 # 查看man screen的TITLES节。
 shelltitle '$ |bash'
@@ -257,8 +257,10 @@ shelltitle '$ |bash'
 
 #change the hardstatus settings to give an window list at the bottom of the screen, with the time and date and with the current window highlighted.
 #hardstatus alwayslastline "%{=b kG} %-Lw%50>%n%f %t%+Lw%< %-=%D %d %M %Y %c:%s%{-}"
-hardstatus alwayslastline "%{=b kG} %-Lw%50>%n%f %t%+Lw%<"
+#hardstatus alwayslastline "%{=b kG} %-Lw%50>%n%f %t%+Lw%<"
 
+hardstatus alwayslastline
+hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %1`%{-}'
 # STARTUP SCREENS
 # ===============================================================
 # Defines the time screen delays a new message when one message
@@ -301,6 +303,7 @@ hardstatus alwayslastline "%{=b kG} %-Lw%50>%n%f %t%+Lw%<"
 
 screen 0 
 screen -t irssi		1	irssi
+screen -t dg		1	ssh dg
 
 #defescape ^Oo
 #escape ^Oo

@@ -27,3 +27,6 @@ alias wcpe='mplayer http://audio-ogg.ibiblio.org:8000/wcpe.ogg'
 alias rescreen='screen -D -R'
 alias rebdwm='pushd ~/tarball/dwm-6.0 && vi config.h && sudo make clean install && popd'
 alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
+alias wmclass='xprop | grep WM_CLASS'
+alias mute='amixer -q sset Master toggle'
+alias fuckgfw='~/bin/shadowsocks -c ~/bin/config.json > ~/log/shadowsocks.log &'

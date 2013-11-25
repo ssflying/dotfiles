@@ -1,4 +1,7 @@
-Xft.dpi:			96
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.autohint: 0
 
 !!! xterm settings
 XTerm*preeditType: Root
@@ -32,7 +35,6 @@ URxvt*title:			rxvt-unicode
 URxvt*scrollBar:		false
 URxvt*scrollstyle:		plain
 !URxvt*saveLines:		8192
-!don't scroll to bottem
 URxvt*scrollTtyOutput:		false
 !scroll with scrollback buffer when tty receives new lines && scrollTtyOutput is false
 URxvt*scrollWithBuffer:		true
