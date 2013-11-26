@@ -286,8 +286,9 @@ hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/
 
 
 screen 0 
-screen -t irssi		1	irssi
-screen -t dg		1	ssh dg
+screen 1 
+#screen -t irssi		1	irssi
+#screen -t dg		1	ssh dg
 
 #defescape ^Oo
 #escape ^Oo

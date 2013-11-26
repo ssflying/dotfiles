@@ -5,9 +5,9 @@
 
 # setup PS1
 if [ $TERM == "screen" ]; then
-    export PS1='\[\033[01;34m\]\W \[\033[00;39m\]☻ '
+    export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
 elif [ $TERM == "xterm" ]; then
-    export PS1='\[\033[01;34m\]\W \[\033[00;39m\]☯ '
+    export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
 else
     export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00;39m\] '
 fi
