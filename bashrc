@@ -4,10 +4,10 @@
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 # setup PS1
-if [ $TERM =~ screen* ]; then
+if [[ $TERM =~ "screen*" ]]; then
     export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
     PROMPT_COMMAND='echo -ne "\033k\033\0134"'
-elif [ $TERM == "xterm" ]; then
+elif [[ $TERM == "xterm" ]]; then
     export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
 else
     export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00;39m\] '
