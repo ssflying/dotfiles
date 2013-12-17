@@ -4,6 +4,7 @@ Xft.hinting: 1
 Xft.autohint: 0
 
 !!! xterm settings
+XTerm*termName:	xterm-256color
 XTerm*preeditType: Root
 XTerm*faceName:   Dejavu Sans Mono
 XTerm*faceNameDoublesize:   WenQuanYi Zen Hei
