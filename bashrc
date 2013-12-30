@@ -15,7 +15,8 @@ fi
 
 
 # ENVIRONMENT
-export PATH=/usr/sbin:/sbin:$PATH
+export GOPATH=$HOME/go
+export PATH=/usr/sbin:/sbin:$PATH:/usr/local/go/bin:$GOPATH/bin
 export EDITOR=vim
 export PAGER=less
 export HISTCONTROL=ignoredups
