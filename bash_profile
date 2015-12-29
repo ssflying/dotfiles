@@ -1,5 +1,8 @@
 # vim: ft=sh
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+# source bashrc when interactive shell 
+case "$-" in 
+	*i*) [[ -f ~/.bashrc ]] && . ~/.bashrc ;;
+esac
 
 # for golang
 if [[ -d $HOME/gowork ]] && hash go 2>/dev/null; then
@@ -13,7 +16,7 @@ if [[ -x $HOME/.rakudobrew/bin/rakudobrew ]]; then
 fi
 
 # re-use ssh-agent
-if [[ -f $HOME/.ssh/id_rsa ]] && [[ -x /usr/bin/keychain ]] ; then
-	/usr/bin/keychain $HOME/.ssh/id_rsa &>/dev/null
+if [[ -f $HOME/.ssh/id_rsa ]] && hash keychain 2>/dev/null ; then
+	keychain $HOME/.ssh/id_rsa &>/dev/null
 	source $HOME/.keychain/$HOSTNAME-sh
 fi

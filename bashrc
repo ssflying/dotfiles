@@ -1,14 +1,19 @@
 # vim: ft=sh
-# setup PS1
-if [[ $TERM =~ screen* ]]; then
-  export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
-  PROMPT_COMMAND='echo -ne "\033k\033\0134"'
-elif [[ $TERM == "xterm" ]]; then
-  export PS1='\[\033[01;34m\]\W \[\033[00;39m\]$ '
-else
-  export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00;39m\] '
+
+# source global
+if [[ -r /etc/bashrc ]]; then
+  source /etc/bashrc
 fi
 
+# setup PS1
+if [[ $TERM =~ screen* ]]; then
+  export PS1='\e[01;34m\W \e[00;39m$ '
+  PROMPT_COMMAND='echo -ne "\033k\033\0134"'
+elif [[ $TERM == "xterm" ]]; then
+  export PS1='\e[01;34m\W \e[00;39m$ '
+else
+  export PS1='\e[01;32m\u\e[01;0m@\e[01;31m\h\e[01;34m \W \$\e[00;39m '
+fi
 
 # ENVIRONMENT
 export EDITOR=vim
