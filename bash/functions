@@ -1,6 +1,6 @@
 # vim: ft=sh
 extr() {
-    if [ -f $1 ] ; then
+    if [[ -f $1 ]] ; then
         case $1 in
             *.tar.bz2)  tar -xvjf $@;;
             *.tar.gz)   tar -xvzf $@;;
@@ -23,7 +23,7 @@ extr() {
 }
 
 show-archive() {
-if [ -f $1 ]; then
+if [[ -f $1 ]]; then
         case $1 in
                 *.tar.bz2)     tar -jtf $1 ;;
                 *.tar.gz)      tar -ztf $1 ;;
@@ -43,53 +43,3 @@ top10cmd() {
   history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 }
 
-
-
-descshow() {
-if [ "$1" = "-a" ]
-then
-        for i in /var/log/packages/$2*
-        do
-                more "$i"
-        done
-else
-        for i in /var/log/packages/*$1*
-        do
-                cat $i | head -n 16
-        done
-fi
-}
-
-tweaktag() {
-    tagdir=/home/pfc/build/tagfiles
-    if [ $# -ne 2 ]; then 
-	echo "Usage: tweaktag [add|skip|show] packagename"
-	return 2
-    fi
-
-    file=`grep -H "$2" $tagdir/*/tagfile | cut -d : -f 1`
-    [ -z $file ] && echo "$2 is not offically supported." && return 2
-
-    case "$1" in
-	a) sed -i /$2/s/SKP/ADD/ $file ;;
-    k) sed -i /$2/s/ADD/SKP/ $file ;;
-s) : ;;
-	*) : ;;
-    esac
-
-    grep -H $2 $file
-}
-
-
-
-dirget() {
-    wget -np -nd -r "$1" && rm -f robots.txt
-}
-
-pkg_size_sort() {
-    pkg=/tmp/pkg_size
-    grep UNCOMP /var/log/packages/* | awk -F : '{print $1 $3}' | \
-	sed 's#/var/log/packages/##g' | sort -r -n -k 2 > $pkg
-    more $pkg
-    rm -f $pkg
-}

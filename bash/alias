@@ -15,20 +15,9 @@ alias more='less'
 # edit alias
 alias vi='vim'
 alias vib='vi ~/.bashrc && . ~/.bashrc'
-alias vil='sudo vim /etc/lilo.conf && sudo lilo -v'
 alias viv='vi ~/.vimrc'
-
-#Some common used directories and mount
-alias musb='sudo mount -t vfat -o iocharset=utf8 /dev/sdb1 /mnt/tmp && cd /mnt/tmp && ls'
-alias umusb='cd && sudo umount /mnt/tmp'
 
 # application alias
 alias wcpe='mplayer http://audio-ogg.ibiblio.org:8000/wcpe.ogg'
-alias rescreen='TERM="xterm-256color" screen -D -R'
+alias rescreen='screen -D -R'
 alias rebdwm='pushd ~/tarball/dwm-6.0 && vi config.h && sudo make clean install && popd'
-alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
-alias wmclass='xprop | grep WM_CLASS'
-alias mute='amixer -q sset Master toggle'
-alias fuckgfw='~/bin/shadowsocks -c ~/bin/config.json > ~/log/shadowsocks.log &'
-alias mc='mc -S dark'
-alias close_dpms='xset -dpms; xset s off'
