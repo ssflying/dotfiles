@@ -1,4 +1,110 @@
 # vim: ft=sh
+
+## post local file to remote directory
+## Usage: postfile <local_file_path> <remote_relative_path>
+## eg: post /etc/passwd to remote htdocs/public/, 
+##     postfile /etc/passwd public/
+postfile() {
+    [[ $# -ne 2 ]] && echo "Usage: $FUNCNAME [local file] [remote dir]" && return 1
+    local file=$1
+    local filename=$(basename $file)
+    local path=$2
+    md5_local=$(md5sum $file | cut -d ' ' -f1)
+    echo "Local md5:  $md5_local"
+    echo -n "Remote md5: "
+    md5_remote=$(curl -s --form file=@$file --form path=$path --form press=Upload http://10.217.152.182/cgi-bin/upload.pl | perl -lne 'if(/Md5sum /){/([0-9a-z]{32})/; print $1}')
+    echo "$md5_remote"
+    if [[ $md5_local = $md5_remote ]]; then
+	echo "remote file download url: http://10.217.152.182/$path/$filename"
+	return 0
+    else
+	return 1
+    fi
+}
+
+### show interface ip
+showip() {
+    local iface=$1
+    /sbin/ifconfig $iface | awk '/inet addr:/ { print substr($2,6) } '
+    return ${PIPESTATUS[0]}
+}
+
+
+### decimal to hex
+dec2hex() {
+    printf "%X\n" $1
+}
+
+### hex to decimal
+hex2dec() {
+    echo $((0x$1))
+}
+
+### clean unattached share memory
+show_unattached_shm() {
+    if [[ $1 = '-v' ]]; then
+    	ipcs -m | awk '{if($6==0 && $3==user){print "#"$0}}' user=$USER
+    else
+    	ipcs -m | awk '{if($6==0 && $3==user){print "ipcrm -m "$2}}' user=$USER
+    fi
+} 
+
+### display md5
+show_md5 () {
+    for arg
+    do  
+        find $(readlink -f $arg) -type f -print0 | xargs -0 md5sum
+    done
+}
+
+### display process number and start time
+show_proc_time() {
+    local proc=$1
+    [[ $# -ne 1 ]] && return 1
+    local number=$(ps h -p $(pgrep -d, $proc) -o comm,lstart | wc -l)
+    local ltime=$(ps h -p $(pgrep $proc | head -1) -o lstart)
+    local time=$(date -d "$ltime" "+%Y-%m-%d %H:%M")
+
+    echo "$proc|$number|$time"
+    return 0
+}
+
+### display free memory in MB
+show_mem_free() {
+    echo "($(awk "/^MemTotal/{print \$2}" /proc/meminfo) - $(ps h -eo rss | awk "{t+=\$1}END{print t}")) / 1024"| bc
+}
+
+### get ssh public key from url and store it locally
+### stimulate ssh-copy-id command
+add_pub_key() {
+    local url="$1"
+    if ssh -V | grep -q OpenSSH &>/dev/null; then
+	[[ -e ~/.ssh ]] || mkdir ~/.ssh 
+	wget -q -O- "$url" >> ~/.ssh/authorized_keys
+	chmod g-w ~/.ssh ~/.ssh/authorized_keys
+    else
+	echo "need OpenSSH_5.x"
+	return 1
+    fi
+}
+
+is_valid_ip()
+{
+    local  ip=$1
+    local  stat=1
+
+    if echo $ip | grep -q "^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}$" 2>/dev/null; then
+        OIFS=$IFS
+        IFS='.'
+        ip=($ip)
+        IFS=$OIFS
+        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+            && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+        stat=$?
+    fi
+    return $stat
+}
+
 extr() {
     if [[ -f $1 ]] ; then
         case $1 in
@@ -22,7 +128,7 @@ extr() {
     fi
 }
 
-show-archive() {
+show_archive() {
 if [[ -f $1 ]]; then
         case $1 in
                 *.tar.bz2)     tar -jtf $1 ;;
@@ -40,6 +146,6 @@ fi
 
 
 top10cmd() {
-  history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+  history | awk '{CMD[$6]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 }
 

@@ -19,5 +19,5 @@ alias viv='vi ~/.vimrc'
 
 # application alias
 alias wcpe='mplayer http://audio-ogg.ibiblio.org:8000/wcpe.ogg'
-alias rescreen='screen -D -R'
+alias rescreen='screen -T linux -D -R'
 alias rebdwm='pushd ~/tarball/dwm-6.0 && vi config.h && sudo make clean install && popd'

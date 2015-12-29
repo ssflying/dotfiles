@@ -74,10 +74,10 @@ vbell_msg "   -- Bell,Bell!! --   "	# default: "Wuff,Wuff!!"
 #  termcapinfo xterm* be
 #
 ## Do not use xterm's alternative window buffer, it breaks scrollback (see bug #61195)
-termcapinfo xterm|xterms|xs ti@:te=\E[2J
+#termcapinfo xterm|xterms|xs ti@:te=\E[2J
 
-term "screen-256color"
-attrcolor b ".I" # use bright colors for bold
+#term "screen-256color"
+#attrcolor b ".I" # use bright colors for bold
 
 # hardcopydir: 存放硬拷贝的目录(C-a h)。
 hardcopydir           ~/.screen
@@ -283,8 +283,6 @@ hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/
 
 # Don't you want to start programs which need a DISPLAY ?
 # setenv DISPLAY ''
-
-
 
 screen 0 
 screen 1 
