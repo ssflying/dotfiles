@@ -5,10 +5,24 @@ case "$-" in
 esac
 
 # for golang
+get_go_path() {
+  local go_abs_path
+  go_abs_path=$(which go)
+  echo "${go_abs_path%/*}"	# dirname
+}
+
 if [[ -d $HOME/gowork ]] && hash go 2>/dev/null; then
   export GOPATH=$HOME/gowork
   export PATH=${PATH}:${GOPATH}/bin
+  # non-default path
+  if ! [[ $(get_go_path) = "/usr/local/go/bin" ]]; then
+    GOROOT=$(get_go_path)
+    export PATH=${PATH}:${GOROOT}
+    export GOROOT=${GOROOT%/*}	# upper
+  fi
 fi
+
+unset get_go_path
 
 # for perlbrew
 if [[ -r $HOME/perl5/perlbrew/etc/bashrc ]]; then
