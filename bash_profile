@@ -34,8 +34,15 @@ if [[ -x $HOME/.rakudobrew/bin/rakudobrew ]]; then
   eval "$($HOME/.rakudobrew/bin/rakudobrew init -)"
 fi
 
+# for rust
+if [[ -r $HOME/.cargo/env ]]; then
+  source $HOME/.cargo/env
+fi
+
 # re-use ssh-agent
 if [[ -f $HOME/.ssh/alickchen.rsa ]] && hash keychain 2>/dev/null ; then
   keychain $HOME/.ssh/alickchen.rsa 2>/dev/null
   source $HOME/.keychain/$HOSTNAME-sh
 fi
+
+export TERM=xterm-256color

@@ -6,12 +6,13 @@ if [[ -r /etc/bashrc ]]; then
 fi
 
 # setup PS1
-Red='\e[01;31m'
-Blue='\e[01;34m'
-Green='\e[01;32m'
-Reset='\e[01;0m'
+Bold=$(tput bold)
+Red=${Bold}$(tput setaf 1)
+Blue=${Bold}$(tput setaf 4)
+Green=${Bold}$(tput setaf 2)
+Reset=$(tput sgr0)
 if [[ $TERM =~ screen* ]]; then
-  export PS1="\[${Blue}\]\W \[${Reset}\]\$ "
+  export PS1="\[${Green}\]\u \[${Blue}\]\W \[${Reset}\]\$ "
   PROMPT_COMMAND='echo -ne "\033k\033\0134"'
 elif [[ $TERM == "xterm" ]]; then
   export PS1="\[${Blue}\]\W \[${Reset}\]\$ "
@@ -35,7 +36,14 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+# colorful ls
+eval "`dircolors`"
+
 # include other bashrc
-for x in $HOME/.bash/* ; do
+for x in $HOME/.bash/*; do
+  if [[ "$USER" != "alickchen" ]] && [[ $x =~ \.tx$ ]]; then
+    # exclude *.tx when at home
+    continue
+  fi
   [[ -x "$x" ]] && source $x
 done
