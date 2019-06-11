@@ -1,6 +1,6 @@
 # vim: ft=sh
 # ls hacks
-alias ls='ls -G'
+alias ls='ls --color=auto -G'
 alias la='ls -a' # List All
 alias ll='ls -l' # Long Listing
 
@@ -21,3 +21,5 @@ alias viv='vi ~/.vimrc'
 alias wcpe='mplayer http://audio-ogg.ibiblio.org:8000/wcpe.ogg'
 alias rescreen='screen -D -R'
 alias rebdwm='pushd ~/tarball/dwm-6.0 && vi config.h && sudo make clean install && popd'
+alias gitbook='sudo docker run --rm -v "$PWD":/gitbook -p 4000:4000 ssflying/gitbook gitbook'
+alias getcaoliuurl='curl -d "a=get18&system=android&v=2.2.2" https://get.xunfs.com/app/listapp.php'

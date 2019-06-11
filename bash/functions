@@ -149,3 +149,10 @@ top10cmd() {
   history | awk '{CMD[$6]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 }
 
+reserve_gitbook () {
+  sudo docker stop $(sudo docker ps -a -q --filter ancestor=ssflying/gitbook)
+  gitbook install \
+    && gitbook build \
+    && gitbook serve
+}
+

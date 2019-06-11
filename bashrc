@@ -6,20 +6,22 @@ if [[ -r /etc/bashrc ]]; then
 fi
 
 # setup PS1
-Bold=$(tput bold)
-Red=${Bold}$(tput setaf 1)
-Blue=${Bold}$(tput setaf 4)
-Green=${Bold}$(tput setaf 2)
-Reset=$(tput sgr0)
-if [[ $TERM =~ screen* ]]; then
-  export PS1="\[${Green}\]\u \[${Blue}\]\W \[${Reset}\]\$ "
-  PROMPT_COMMAND='echo -ne "\033k\033\0134"'
-elif [[ $TERM == "xterm" ]]; then
-  export PS1="\[${Blue}\]\W \[${Reset}\]\$ "
-else
-  export PS1="\[${Green}\]\u\[${Reset}\]@\[${Red}\]\h\[${Blue}\] \W \$\[${Reset}\] "
+if [ -t 1 ]; then
+  Bold=$(tput bold)
+  Red=${Bold}$(tput setaf 1)
+  Blue=${Bold}$(tput setaf 4)
+  Green=${Bold}$(tput setaf 2)
+  Reset=$(tput sgr0)
+  if [[ $TERM =~ screen* ]]; then
+    export PS1="\[${Green}\]\u \[${Blue}\]\W \[${Reset}\]\$ "
+    PROMPT_COMMAND='echo -ne "\033k\033\0134"'
+  elif [[ $TERM == "xterm" ]]; then
+    export PS1="\[${Blue}\]\W \[${Reset}\]\$ "
+  else
+    export PS1="\[${Green}\]\u\[${Reset}\]@\[${Red}\]\h\[${Blue}\] \W \$\[${Reset}\] "
+  fi
+  unset Red Green Reset Blue
 fi
-unset Red Green Reset Blue
 
 # ENVIRONMENT
 export EDITOR=vim
