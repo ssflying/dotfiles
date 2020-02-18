@@ -1,5 +1,6 @@
 # vim: ft=sh
 
+export PATH=$HOME/bin:$PATH
 # source global
 if [[ -r /etc/bashrc ]]; then
   source /etc/bashrc
