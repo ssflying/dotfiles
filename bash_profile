@@ -4,6 +4,9 @@ case "$-" in
   *i*) [[ -f ~/.bashrc ]] && . ~/.bashrc ;;
 esac
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # for golang
 get_go_path() {
   local go_abs_path
@@ -40,9 +43,14 @@ if [[ -r $HOME/.cargo/env ]]; then
 fi
 
 # re-use ssh-agent
-if [[ -f $HOME/.ssh/alickchen.rsa ]] && hash keychain 2>/dev/null ; then
-  keychain $HOME/.ssh/alickchen.rsa 2>/dev/null
+if [[ -f $HOME/.ssh/id_rsa ]] && hash keychain 2>/dev/null ; then
+  keychain $HOME/.ssh/id_rsa 2>/dev/null
   source $HOME/.keychain/$HOSTNAME-sh
 fi
 
+# for git
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source $HOME/.bash-git-prompt/gitprompt.sh
+fi
 export TERM=xterm-256color
