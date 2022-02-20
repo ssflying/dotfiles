@@ -15,7 +15,7 @@ if [ -t 1 ]; then
   Reset=$(tput sgr0)
   if [[ $TERM =~ screen* ]]; then
     export PS1="\[${Green}\]\u \[${Blue}\]\W \[${Reset}\]\$ "
-    PROMPT_COMMAND='echo -ne "\033k\033\0134"'
+    PROMPT_COMMAND='echo -ne "\033k\033\0134"; history -a'
   elif [[ $TERM == "xterm" ]]; then
     export PS1="\[${Blue}\]\W \[${Reset}\]\$ "
   else
@@ -27,8 +27,14 @@ fi
 # ENVIRONMENT
 export EDITOR=vim
 export PAGER=less
+
+# History 
+shopt -s histappend cmdhist
 export HISTCONTROL=ignoredups
-export HISTIGNORE='&:bg:fg:ls:h'
+export HISTIGNORE='&:bg:fg:ls:h:history'
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+export PROMPT_COMMAND='history -a'
 
 # colorful man
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -44,7 +50,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # include other bashrc
 for x in $HOME/.bash/*; do
-  if [[ "$USER" != "alickchen" ]] && [[ $x =~ \.tx$ ]]; then
+  if [[ "$USER" != "alick" ]] && [[ $x =~ \.tx$ ]]; then
     # exclude *.tx when at home
     continue
   fi

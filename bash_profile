@@ -7,7 +7,9 @@ esac
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# for golang
+
+export PATH=/usr/local/go/bin:$PATH
+#for golang
 get_go_path() {
   local go_abs_path
   go_abs_path=$(which go)
@@ -36,7 +38,10 @@ fi
 if [[ -x $HOME/.rakudobrew/bin/rakudobrew ]]; then
   eval "$($HOME/.rakudobrew/bin/rakudobrew init -)"
 fi
-
+# for python36
+if [[ -x /opt/python36/bin/python3 ]]; then
+  export PATH=/opt/python36/bin:$PATH
+fi
 # for rust
 if [[ -r $HOME/.cargo/env ]]; then
   source $HOME/.cargo/env
